@@ -1,4 +1,4 @@
-fronter can be used to test a list of domain names against your CDN endpoint to validate if they are frontable. 
+fronter can be used to test a list of domain names against your CDN endpoint to validate if they are frontable. It will also check the categorization of the domain against IBM X-Force Exchange.
 
 Censys.io is nice way to find possible frontable domains, especially if you use their API.
 
@@ -32,39 +32,39 @@ tile.cdn.mierune.co.jp
 $ python3 fronter.py -d rip-derbycon.azureedge.net -f domains.txt
 [+] CDN Endpoint: rip-derbycon.azureedge.net
 
-[+] Testing: www.suzuki.kanagawa.jp
-[+] Testing: cdn-atfujita-verizon.azure.aaq.jp
-[+] Testing: cdn.ambitenergy.jp
+[+] Testing: www.suzuki.kanagawa.jp (Unknown)
+[+] Testing: cdn-atfujita-verizon.azure.aaq.jp (Unknown)
+[+] Testing: cdn.ambitenergy.jp (Unknown)
 [!] Testing: cdn.msjpdsi.com
-[+] Testing: cdn2.msjpdsi.com
+[+] Testing: cdn2.msjpdsi.com (Unknown)
 [!] Testing: images.suzuki.kanagawa.jp
-[+] Testing: jp.amari.com
-[+] Testing: jp.aorus.com
-[+] Testing: jp.mosaic-collection.com
-[+] Testing: jp.shama.com
-[+] Testing: jp.trip-fever.com
+[+] Testing: jp.amari.com (Travel)
+[+] Testing: jp.aorus.com (Software / Hardware)
+[+] Testing: jp.mosaic-collection.com (Travel)
+[+] Testing: jp.shama.com (General Business)
+[+] Testing: jp.trip-fever.com (Unknown)
 [!] Testing: support.kinq.jp
-[+] Testing: td-cdn.aaq.jp
-[+] Testing: tile.cdn.mierune.co.jp
+[+] Testing: td-cdn.aaq.jp (Unknown)
+[+] Testing: tile.cdn.mierune.co.jp (Unknown)
 
 [+] Done!
 Login to VPS and find your frontable domains
-cat /var/log/apache2/access.log | grep python-requests | awk -F"canary-" {'print $2'} | cut -d " " -f 1 | sort -u
+cat /var/log/apache2/access.log | grep python-requests | awk -F"fronter-" {'print $2'} | cut -d " " -f 1 | sort -u
 ~~~
 
 
 3. Login to your VPS to see what domains are frontable 
 ~~~
-$ cat /var/log/apache2/access.log | grep python-requests | awk -F"canary-" {'print $2'} | cut -d " " -f 1 | sort -u
+$ cat /var/log/apache2/access.log | grep python-requests | awk -F"fronter-" {'print $2'} | cut -d " " -f 1 | sort -u
 
-cdn2.msjpdsi.com
-cdn.ambitenergy.jp
-cdn-atfujita-verizon.azure.aaq.jp
-jp.amari.com
-jp.aorus.com
-jp.mosaic-collection.com
-jp.trip-fever.com
-td-cdn.aaq.jp
-tile.cdn.mierune.co.jp
-www.suzuki.kanagawa.jp
+cdn2.msjpdsi.com-(Unknown)
+cdn.ambitenergy.jp-(Unknown)
+cdn-atfujita-verizon.azure.aaq.jp-(Unknown)
+jp.amari.com-(Travel)
+jp.aorus.com-(Software-/-Hardware)
+jp.mosaic-collection.com-(Travel)
+jp.trip-fever.com-(Unknown)
+td-cdn.aaq.jp-(Unknown)
+tile.cdn.mierune.co.jp-(Unknown)
+www.suzuki.kanagawa.jp-(Unknown)
 ~~~
