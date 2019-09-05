@@ -8,7 +8,7 @@ import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import sys
 
-# This function has been shamelessly stolen from l0gan's domrom l0gan's domainCat. It's chill, we're friends. Available here: https://github.com/l0gan/domainCat/
+# This function has been shamelessly stolen from l0gan's domainCat. It's chill, we're friends. Available here: https://github.com/l0gan/domainCat/
 def checkIBMxForce(domain):
     s = requests.Session()
     # Hack to prevent cert warnings
